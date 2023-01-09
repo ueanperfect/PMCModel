@@ -1,2 +1,4 @@
-data
-checkpoints
+/data
+/checkpoints
+/wandb
+*.log
