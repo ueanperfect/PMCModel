@@ -15,12 +15,12 @@ transforms = Compose([ToTensor(), Resize((224, 224))])
 training_dataset = PMDatasets(data_path='data/imagenet', data_type='train', transforms=transforms)
 testing_dataset = PMDatasets(data_path='data/imagenet', data_type='test', transforms=transforms)
 
-training_dataloader = DataLoader(training_dataset, batch_size=batch_size, shuffle=True)ia
+training_dataloader = DataLoader(training_dataset, batch_size=batch_size, shuffle=True)
 testing_dataloader = DataLoader(training_dataset, batch_size=batch_size, shuffle=False)
 
 ## experientment part
 
-model_list = ['resnet50', 'resnet34', 'resnet18', 'resnet101']
+model_list = ['resnet101']
 
 for model_name in model_list:
     head = NormalHead(3)

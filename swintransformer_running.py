@@ -20,22 +20,20 @@ testing_dataloader = DataLoader(training_dataset, batch_size=batch_size, shuffle
 
 ## experientment part
 
-model_list = ['swin_t', 'swin_b', 'swin_s']
+model_name = 'swin_t' #, 'swin_t', 'swin_s'
 
-for model_name in model_list:
+head = NormalHead(3)
+backbone = SwinTransformer(model_name=model_name)
+classifier = BaseClassifier(model_name, backbone, head, cross_entropy)
+classifier = classifier.to(device)
 
-    head = NormalHead(3)
-    backbone = SwinTransformer(model_name=model_name)
-    classifier = BaseClassifier(model_name, backbone, head, cross_entropy)
-    classifier = classifier.to(device)
+logger = PMLogger(path='work_dir', model_name=model_name)
 
-    logger = PMLogger(path='work_dir', model_name=model_name)
+optimizer = optim.Adam(classifier.parameters())
 
-    optimizer = optim.Adam(classifier.parameters())
+learner = Learner(training_dataloader, classifier, optimizer, logger, device)
+evaluator = Evaluator(testing_dataloader, classifier, logger, device)
 
-    learner = Learner(training_dataloader, classifier, optimizer, logger, device)
-    evaluator = Evaluator(testing_dataloader, classifier, logger, device)
+runner = Runner(evaluator, learner, logger, max_epoch=60)
 
-    runner = Runner(evaluator, learner, logger, max_epoch=60)
-
-    runner.run()
+runner.run()

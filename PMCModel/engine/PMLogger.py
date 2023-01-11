@@ -31,7 +31,7 @@ class PMLogger():
         logging.basicConfig(filename=logging_path, format='%(asctime)s-%(levelname)s: %(message)s', level=logging.DEBUG)
 
     def save_checkpoint(self, model, epoch_number):
-        checkpoints_name = "{}_{}_{}".format(model.model_name, str(epoch_number), '.pth')
+        checkpoints_name = "{}_{}_{}".format(model.model_name, str(epoch_number+1), '.pth')
         torch.save(model.state_dict(), os.path.join(self.current_path, 'checkpoints', checkpoints_name))
         logging.info("{}_{} has been saved \n".format(model.model_name, epoch_number))
         print("{}_{} has been saved \n".format(model.model_name, epoch_number))

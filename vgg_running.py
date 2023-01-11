@@ -20,7 +20,7 @@ testing_dataloader = DataLoader(training_dataset, batch_size=batch_size, shuffle
 
 ## experientment part
 
-model_list = ['vgg11', 'vgg13', 'vgg16', 'vgg19']
+model_list = ['vgg19']
 
 for model_name in model_list:
     head = NormalHead(3)

@@ -20,21 +20,19 @@ testing_dataloader = DataLoader(training_dataset, batch_size=batch_size, shuffle
 
 ## experientment part
 
-model_list = ['vit_b_16', 'vit_b_32', 'vit_l_16', 'vit_l_32', 'vit_h_14']
+model_name = 'vit_b_16'  # 'vit_b_32', 'vit_l_16', 'vit_l_32', 'vit_h_14']
+head = NormalHead(3)
+backbone = VisionTransformer(model_name=model_name)
+classifier = BaseClassifier(model_name, backbone, head, cross_entropy)
+classifier = classifier.to(device)
 
-for model_name in model_list:
-    head = NormalHead(3)
-    backbone = VisionTransformer(model_name=model_name)
-    classifier = BaseClassifier(model_name, backbone, head, cross_entropy)
-    classifier = classifier.to(device)
+logger = PMLogger(path='work_dir', model_name=model_name)
 
-    logger = PMLogger(path='work_dir', model_name=model_name)
+optimizer = optim.Adam(classifier.parameters())
 
-    optimizer = optim.Adam(classifier.parameters())
+learner = Learner(training_dataloader, classifier, optimizer, logger, device)
+evaluator = Evaluator(testing_dataloader, classifier, logger, device)
 
-    learner = Learner(training_dataloader, classifier, optimizer, logger, device)
-    evaluator = Evaluator(testing_dataloader, classifier, logger, device)
+runner = Runner(evaluator, learner, logger, max_epoch=60)
 
-    runner = Runner(evaluator, learner, logger, max_epoch=60)
-
-    runner.run()
+runner.run()

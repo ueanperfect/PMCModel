@@ -1,4 +1,4 @@
 /data
 /checkpoints
 /wandb
-*.log
+*.pth
