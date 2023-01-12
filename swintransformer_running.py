@@ -20,7 +20,7 @@ testing_dataloader = DataLoader(training_dataset, batch_size=batch_size, shuffle
 
 ## experientment part
 
-model_name = 'swin_t' #, 'swin_t', 'swin_s'
+model_name = 'swin_s' #, 'swin_t', 'swin_s'
 
 head = NormalHead(3)
 backbone = SwinTransformer(model_name=model_name)

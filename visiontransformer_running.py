@@ -20,7 +20,7 @@ testing_dataloader = DataLoader(training_dataset, batch_size=batch_size, shuffle
 
 ## experientment part
 
-model_name = 'vit_b_16'  # 'vit_b_32', 'vit_l_16', 'vit_l_32', 'vit_h_14']
+model_name = 'vit_l_32'  # 'vit_b_32', 'vit_l_16', 'vit_l_32]
 head = NormalHead(3)
 backbone = VisionTransformer(model_name=model_name)
 classifier = BaseClassifier(model_name, backbone, head, cross_entropy)
