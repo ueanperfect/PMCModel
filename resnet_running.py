@@ -20,7 +20,7 @@ testing_dataloader = DataLoader(training_dataset, batch_size=batch_size, shuffle
 
 ## experientment part
 
-model_list = ['resnet101']
+model_list = ['resnet50']
 
 for model_name in model_list:
     head = NormalHead(3)
