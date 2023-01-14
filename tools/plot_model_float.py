@@ -46,4 +46,4 @@ if __name__ == "__main__":
     data = json.load(f)
 
     draw_flops(data['flops'],'/Users/yueyanli/Desktop/flops.png')
-    draw_flops(data['params'],'/Users/yueyanli/Desktop/params.png')
+    draw_params(data['params'],'/Users/yueyanli/Desktop/params.png')
